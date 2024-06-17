@@ -1,21 +1,28 @@
 package blackjack;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
 
     private final String name;
-    public User(String name) {
+    private List<Card> cards = new ArrayList<>();
+
+
+    public User(String name, Card card1, Card card2) {
         this.name = name;
-    }
-
-
-    public String getUserName() {
-        return name;
+        cards.addAll(List.of(card1, card2));
     }
 
     public List<Card> getCards() {
-        return null;
+        return cards;
+    }
+
+    public void addCard(Card card) {
+        cards.add(card);
+    }
+
+    public String getName() {
+        return name;
     }
 }

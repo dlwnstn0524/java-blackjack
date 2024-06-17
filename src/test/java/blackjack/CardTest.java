@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 
 class CardTest {
@@ -13,5 +14,12 @@ class CardTest {
         Card card = new Card(Pattern.CLOVER, Value.FOUR);
         assertThat(card.getPattern()).isEqualTo(Pattern.CLOVER);
         assertThat(card.getValue()).isEqualTo(Value.FOUR);
+    }
+
+    @Test
+    @DisplayName("카드는 중복되지 않는다")
+    public void duplicateCard(){
+        Card card = new Card(Pattern.CLOVER, Value.FOUR);
+        assertThatIllegalArgumentException().isThrownBy(()-> new Card(Pattern.CLOVER, Value.FOUR));
     }
 }

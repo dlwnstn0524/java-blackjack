@@ -28,6 +28,12 @@ class LambdaTest {
         assertThat(result).isEqualTo(12);
     }
 
+    @Test
+    void sumAllOverThree(){
+        final int result = sum(numbers, num -> num>3);
+        assertThat(result).isEqualTo(15);
+    }
+
     private int sum(List<Integer> numbers, Predicate<Integer> addable) {
         int total = 0;
         for (int number : numbers) {
