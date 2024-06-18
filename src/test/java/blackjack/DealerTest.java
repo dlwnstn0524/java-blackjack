@@ -8,17 +8,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DealerTest {
     @Test
-    @DisplayName("딜러는 자신의 카드의 합을 알고있다")
+    @DisplayName("딜러는 자신이 더 카드를 받아올 수 있는지에 대해 알고 있다")
     void deal(){
-        Dealer dealer = new Dealer(new Card(Pattern.DIAMOND, Value.TWO), new Card(Pattern.CLOVER, Value.KING));
-        assertThat(dealer.getSum()).isEqualTo(12);
-    }
+        Dealer dealer1 = new Dealer(new Card(Pattern.DIAMOND, Value.TWO), new Card(Pattern.CLOVER, Value.KING));
+        assertThat(dealer1.canGet()).isEqualTo(true);
 
-    @Test
-    @DisplayName("딜러는 자신의 카드의 합을 알고있다")
-    void test2(){
-        Dealer dealer = new Dealer(new Card(Pattern.DIAMOND, Value.TWO), new Card(Pattern.CLOVER, Value.KING));
-        assertThat(dealer.getSum()).isEqualTo(12);
+        Dealer dealer2 = new Dealer(new Card(Pattern.DIAMOND, Value.SEVEN), new Card(Pattern.CLOVER, Value.KING));
+        assertThat(dealer2.canGet()).isEqualTo(false);
     }
 
 }

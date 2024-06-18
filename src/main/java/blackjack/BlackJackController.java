@@ -16,12 +16,65 @@ public class BlackJackController {
     public void run() throws IOException {
         initGame();
         handOut();
+        dealerHandOut();
+        calculate();
+        gameResult();
+    }
+
+    private void calculate() {
+        // 딜러 카드 출력 및 합 출력
+        StringBuilder sb = new StringBuilder();
+        sb.append("딜러: ");
+        List<Card> cards = dealer.getCards();
+        for(Card card : cards) {
+            sb.append(card + ", ");
+        }
+        sb.append("- 결과: " + dealer.getSum());
+        sb.append("\n");
+
+        // 플레이어 카드 출력 및 합 출력
+        for (User user : users) {
+            sb.append(user.getName() + ": ");
+            List<Card> temp = user.getCards();
+            for(Card card : temp) {
+                sb.append(card + ", ");
+            }
+            sb.append("- 결과: " + user.getSum());
+            sb.append("\n");
+        }
+        OutputView.calculateResult(sb.toString());
+    }
+
+    private void dealerHandOut() {
+        if (dealer.isAvalible()){
+            OutputView.dealerHandOut();
+            dealer.addCard(cardDeque.handOut());
+        }
+    }
+
+    private void gameResult() {
+        // 각 객체의 숫자 합을 활용한 최종 승패 출력
+
     }
 
     private void handOut() throws IOException {
-//        for(User user : game.getPlayers()) {
-//            game.play(user, InputView.requireContinue(user.getName()));
-//        }
+        for (User user : users) {
+            String answer = InputView.requireContinue(user.getName());
+            if (answer.equals("n")) {
+                continue;
+            }
+            if (answer.equals("y")) {
+                user.addCard(cardDeque.handOut());
+                // 유저 추가된 카드 출력하기
+                StringBuilder result = new StringBuilder();
+                result.append(user.getName() + ": ");
+                List<Card> cards = user.getCards();
+                for(Card card : cards) {
+                    result.append(card + ", ");
+                }
+                OutputView.userHandOut(result.toString());
+            }
+        }
     }
 
     private void initGame() throws IOException {
@@ -39,9 +92,14 @@ public class BlackJackController {
 
     private String initResult() {
         StringBuilder result = new StringBuilder();
-        result.append("딜러: " + dealer.getFirstCard());
+        result.append("딜러: " + dealer.getFirstCard() + "\n");
         for(User user : users) {
-            result.append(user.getName() + " ");
+            result.append(user.getName() + ": ");
+            List<Card> cards = user.getCards();
+            for(Card card : cards) {
+                result.append(card + ", ");
+            }
+            result.append("\n");
         }
         return result.toString();
     }

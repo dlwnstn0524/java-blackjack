@@ -1,7 +1,6 @@
 package blackjack;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Stack;
 
 public class CardDeque {
@@ -24,9 +23,5 @@ public class CardDeque {
 
     public Card handOut() {
         return cards.pop();
-    }
-
-    public List<Card> getCards() {
-        return this.cards;
     }
 }
