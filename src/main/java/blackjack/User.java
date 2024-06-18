@@ -7,7 +7,7 @@ public class User {
 
     private final String name;
     private List<Card> cards = new ArrayList<>();
-    private boolean isAvalible;
+    private boolean isBusted;
     private int sum;
 
 
@@ -15,7 +15,7 @@ public class User {
         this.name = name;
         cards.addAll(List.of(card1, card2));
         this.sum = card1.getValue().getNum() + card2.getValue().getNum();
-        this.isAvalible = true;
+        this.isBusted = true;
     }
 
     public List<Card> getCards() {
@@ -38,9 +38,9 @@ public class User {
             sum += card.getValue().getNum();
         }
         if (sum > 21) {
-            isAvalible = false;
+            isBusted = false;
         } else {
-            isAvalible = true;
+            isBusted = true;
         }
     }
 
@@ -48,7 +48,7 @@ public class User {
         return name;
     }
 
-    public boolean isAvalible() {
-        return isAvalible;
+    public boolean isBusted() {
+        return isBusted;
     }
 }

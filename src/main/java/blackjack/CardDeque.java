@@ -13,7 +13,6 @@ public class CardDeque {
                 cards.push(new Card(pattern, value));
             }
         }
-
         shuffle();
     }
 

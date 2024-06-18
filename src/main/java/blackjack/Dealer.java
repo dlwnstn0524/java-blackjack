@@ -6,7 +6,7 @@ public class Dealer {
 
     private List<Card> cards = new ArrayList<>();
     private int sum;
-    private boolean isAvalible;
+    private boolean isBusted;
 
     public Dealer(Card... cards) {
         this.sum = 0;
@@ -14,7 +14,7 @@ public class Dealer {
             this.cards.add(cards[i]);
             this.sum += cards[i].getValue().getNum();
         }
-        this.isAvalible = true;
+        this.isBusted = true;
     }
 
     public void addCard(Card card) {
@@ -26,9 +26,9 @@ public class Dealer {
     private void calculateIsAvalible() {
 
         if (sum > 15) {
-            isAvalible = false;
+            isBusted = false;
         } else {
-            isAvalible = true;
+            isBusted = true;
         }
     }
 
@@ -36,8 +36,8 @@ public class Dealer {
         return cards.get(0).toString();
     }
 
-    public boolean isAvalible() {
-        return isAvalible;
+    public boolean isBusted() {
+        return isBusted;
     }
 
     public List<Card> getCards() {

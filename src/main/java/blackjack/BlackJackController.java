@@ -46,7 +46,7 @@ public class BlackJackController {
     }
 
     private void dealerHandOut() {
-        if (dealer.isAvalible()){
+        if (dealer.isBusted()){
             OutputView.dealerHandOut();
             dealer.addCard(cardDeque.handOut());
         }
@@ -60,7 +60,7 @@ public class BlackJackController {
         sb.append("## 최종 승패\n");
         for (User user : users) {
 
-            if (user.isAvalible() && user.getSum() > dealer.getSum()){
+            if (user.isBusted() && user.getSum() > dealer.getSum()){
                 lose++;
                 sb.append(user.getName() + ": 승\n");
             } else {
@@ -74,7 +74,7 @@ public class BlackJackController {
 
     private void handOut() throws IOException {
         for (User user : users) {
-            while(user.isAvalible()){
+            while(user.isBusted()){
                 String answer = InputView.requireContinue(user.getName());
                 if (answer.equals("n")) {
                     break;
