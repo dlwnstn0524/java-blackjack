@@ -14,6 +14,7 @@ public class Dealer {
             this.cards.add(cards[i]);
             this.sum += cards[i].getValue().getNum();
         }
+        this.isAvalible = true;
     }
 
     public void addCard(Card card) {

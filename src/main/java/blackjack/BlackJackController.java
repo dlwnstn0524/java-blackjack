@@ -54,25 +54,42 @@ public class BlackJackController {
 
     private void gameResult() {
         // 각 객체의 숫자 합을 활용한 최종 승패 출력
+        int win = 0;
+        int lose = 0;
+        StringBuilder sb = new StringBuilder();
+        sb.append("## 최종 승패\n");
+        for (User user : users) {
 
+            if (user.isAvalible() && user.getSum() > dealer.getSum()){
+                lose++;
+                sb.append(user.getName() + ": 승\n");
+            } else {
+                win++;
+                sb.append(user.getName() + ": 패\n");
+            }
+
+        }
+        OutputView.gameResult(sb.toString());
     }
 
     private void handOut() throws IOException {
         for (User user : users) {
-            String answer = InputView.requireContinue(user.getName());
-            if (answer.equals("n")) {
-                continue;
-            }
-            if (answer.equals("y")) {
-                user.addCard(cardDeque.handOut());
-                // 유저 추가된 카드 출력하기
-                StringBuilder result = new StringBuilder();
-                result.append(user.getName() + ": ");
-                List<Card> cards = user.getCards();
-                for(Card card : cards) {
-                    result.append(card + ", ");
+            while(user.isAvalible()){
+                String answer = InputView.requireContinue(user.getName());
+                if (answer.equals("n")) {
+                    break;
                 }
-                OutputView.userHandOut(result.toString());
+                if (answer.equals("y")) {
+                    user.addCard(cardDeque.handOut());
+                    // 유저 추가된 카드 출력하기
+                    StringBuilder result = new StringBuilder();
+                    result.append(user.getName() + ": ");
+                    List<Card> cards = user.getCards();
+                    for(Card card : cards) {
+                        result.append(card + ", ");
+                    }
+                    OutputView.userHandOut(result.toString());
+                }
             }
         }
     }

@@ -24,4 +24,8 @@ public class OutputView {
     public static void calculateResult(String msg) {
         System.out.println(msg);
     }
+
+    public static void gameResult(String msg) {
+        System.out.println(msg);
+    }
 }

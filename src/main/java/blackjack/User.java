@@ -15,6 +15,7 @@ public class User {
         this.name = name;
         cards.addAll(List.of(card1, card2));
         this.sum = card1.getValue().getNum() + card2.getValue().getNum();
+        this.isAvalible = true;
     }
 
     public List<Card> getCards() {
